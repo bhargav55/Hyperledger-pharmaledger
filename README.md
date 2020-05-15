@@ -1,4 +1,4 @@
-# Pharmaledger
+# PharmaLedger
 
 The application tracks the medicine supply chain right from origin at the manufacturer till the medicine gets sold to any
 customer by retailer. Each flow in the process is updated in the ledger which is immutable and is recorded as a transaction.
