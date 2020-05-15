@@ -1,0 +1,11 @@
+{
+    "index": {
+        "fields": [
+            "doctype",
+            "manufacturername"
+        ]
+    },
+    "ddoc": "indexOnManufacturerName",
+    "name": "indexOnManufacturerName",
+    "type": "json"
+}

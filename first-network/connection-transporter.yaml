@@ -1,0 +1,75 @@
+---
+name: first-network-transporter
+version: 1.0.0
+client:
+  organization: Transporter
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Transporter:
+    mspid: TransporterMSP
+    peers:
+    - peer0.transporter.pharma-network.com
+    - peer1.transporter.pharma-network.com
+    certificateAuthorities:
+    - ca.transporter.pharma-network.com
+peers:
+  peer0.transporter.pharma-network.com:
+    url: grpcs://localhost:11051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICkjCCAjigAwIBAgIRAJvEnXeb4eHVfxyVTYax+D8wCgYIKoZIzj0EAwIwgZIx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMScwJQYDVQQKEx50cmFuc3BvcnRlci5waGFybWEtbmV0d29yay5j
+        b20xLTArBgNVBAMTJHRsc2NhLnRyYW5zcG9ydGVyLnBoYXJtYS1uZXR3b3JrLmNv
+        bTAeFw0yMDA1MTQxMzAzMDBaFw0zMDA1MTIxMzAzMDBaMIGSMQswCQYDVQQGEwJV
+        UzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEn
+        MCUGA1UEChMedHJhbnNwb3J0ZXIucGhhcm1hLW5ldHdvcmsuY29tMS0wKwYDVQQD
+        EyR0bHNjYS50cmFuc3BvcnRlci5waGFybWEtbmV0d29yay5jb20wWTATBgcqhkjO
+        PQIBBggqhkjOPQMBBwNCAAQ7qYg44t1z+b1Ml71tLsBODiABTMKNWhsANMeX1PR8
+        GWJq7qSqIHzgER0q6e/59EY/WczfxSO4eM6spv4SNNf4o20wazAOBgNVHQ8BAf8E
+        BAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQF
+        MAMBAf8wKQYDVR0OBCIEIArPwjX5mq/GE7mY/lP02HHUICYc2z3rfyOELIvnKK1J
+        MAoGCCqGSM49BAMCA0gAMEUCIQCru3OSmMFbValvyIh49BfOgNDyExOCc+Coi/Yu
+        n8ii9wIga77diiar5Nm3RUnJkVw1iPMHqxZm7n/jC6Ws9JnXR7s=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.transporter.pharma-network.com
+      hostnameOverride: peer0.transporter.pharma-network.com
+  peer1.orgtransporter.pharma-network.com:
+    url: grpcs://localhost:12051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIICkjCCAjigAwIBAgIRAJvEnXeb4eHVfxyVTYax+D8wCgYIKoZIzj0EAwIwgZIx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMScwJQYDVQQKEx50cmFuc3BvcnRlci5waGFybWEtbmV0d29yay5j
+        b20xLTArBgNVBAMTJHRsc2NhLnRyYW5zcG9ydGVyLnBoYXJtYS1uZXR3b3JrLmNv
+        bTAeFw0yMDA1MTQxMzAzMDBaFw0zMDA1MTIxMzAzMDBaMIGSMQswCQYDVQQGEwJV
+        UzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEn
+        MCUGA1UEChMedHJhbnNwb3J0ZXIucGhhcm1hLW5ldHdvcmsuY29tMS0wKwYDVQQD
+        EyR0bHNjYS50cmFuc3BvcnRlci5waGFybWEtbmV0d29yay5jb20wWTATBgcqhkjO
+        PQIBBggqhkjOPQMBBwNCAAQ7qYg44t1z+b1Ml71tLsBODiABTMKNWhsANMeX1PR8
+        GWJq7qSqIHzgER0q6e/59EY/WczfxSO4eM6spv4SNNf4o20wazAOBgNVHQ8BAf8E
+        BAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQF
+        MAMBAf8wKQYDVR0OBCIEIArPwjX5mq/GE7mY/lP02HHUICYc2z3rfyOELIvnKK1J
+        MAoGCCqGSM49BAMCA0gAMEUCIQCru3OSmMFbValvyIh49BfOgNDyExOCc+Coi/Yu
+        n8ii9wIga77diiar5Nm3RUnJkVw1iPMHqxZm7n/jC6Ws9JnXR7s=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.transporter.pharma-network.com
+      hostnameOverride: peer1.transporter.pharma-network.com
+certificateAuthorities:
+  ca.orgtransporter.pharma-network.com:
+    url: https://localhost:9054
+    caName: ca-transporter
+    tlsCACerts:
+      pem: |
+        ${CAPEM}
+    httpOptions:
+      verify: false

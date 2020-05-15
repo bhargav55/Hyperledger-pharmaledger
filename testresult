@@ -1,0 +1,123 @@
+
+### register manufacturer company
+
+curl -s -X POST http://localhost:5000/registerCompany -H "content-type: application/json" -d "{\"companyName\" : \"company1\", \"location\" : \"bangalore\", \"companyRole\" : \"manufacturer\" }"
+
+### result of the request
+
+{"status":"success","message":"Registered company company1 successfully","data":"{\"companyid\":\"4\",\"doctype\":\"company\",\"name\":\"company4\",\"location\":\"bangalore\",\"organizationrole\":\"distributor\",\"hierarchykey\":2,\"createdat\":\"2020-05-15 06:30:03.324 +0000 UTC\"}"}
+
+
+### register distributor company
+
+curl -s -X POST http://localhost:5000/registerCompany -H "content-type: application/json" -d "{\"companyName\" : \"company4\", \"location\" : \"bangalore\", \"companyRole\" : \"distributor\" }"
+
+### result of the request
+
+{"status":"success","message":"Registered company company4 successfully","data":"{\"companyid\":\"4\",\"doctype\":\"company\",\"name\":\"company4\",\"location\":\"bangalore\",\"organizationrole\":\"distributor\",\"hierarchykey\":2,\"createdat\":\"2020-05-15 06:44:03.324 +0000 UTC\"}"}
+
+### register transporter company
+
+curl -s -X POST http://localhost:5000/registerCompany -H "content-type: application/json" -d "{\"companyName\" : \"company5\", \"location\" : \"bangalore\", \"companyRole\" : \"transporter\" }"
+
+### result of the request
+
+{"status":"success","message":"Registered company company5 successfully","data":"{\"companyid\":\"5\",\"doctype\":\"company\",\"name\":\"company5\",\"location\":\"bangalore\",\"organizationrole\":\"transporter\",\"hierarchykey\":0,\"createdat\":\"2020-05-15 06:54:20.726 +0000 UTC\"}"}
+
+### register retailer company
+
+curl -s -X POST http://localhost:5000/registerCompany -H "content-type: application/json" -d "{\"companyName\" : \"company6\", \"location\" : \"bangalore\", \"companyRole\" : \"retailer\" }"
+
+### result of the request
+
+{"status":"success","message":"Registered company company6 successfully","data":"{\"companyid\":\"6\",\"doctype\":\"company\",\"name\":\"company6\",\"location\":\"bangalore\",\"organizationrole\":\"retailer\",\"hierarchykey\":3,\"createdat\":\"2020-05-15 07:30:53.629 +0000 UTC\"}"
+
+### Manufacturer adding medicine1 with serial1
+
+curl -s -X POST http://localhost:5000/addMedicine -H "content-type: application/json" -d "{\"drugName\" : \"medicine1\", \"serialNo\" : \"serial1\", \"mfgDate\" : \"01-01-2020\", \"expDate\" : \"01-01-2030\" , \"owner\" : \"1\" , \"manufactureId\" : \"1\",\"manufactureName\" : \"company1\" , \"companyRole\" : \"manufacturer\"  }"
+
+### result of the request
+
+{"status":"success","message":"Added medicine successfully"}
+
+### Manufacturer adding medicine1 with serail2
+
+curl -s -X POST http://localhost:5000/addMedicine -H "content-type: application/json" -d "{\"drugName\" : \"medicine1\", \"serialNo\" : \"serial2\", \"mfgDate\" : \"01-01-2020\", \"expDate\" : \"01-01-2030\" , \"owner\" : \"1\" , \"manufactureId\" : \"1\",\"manufactureName\" : \"company1\" , \"companyRole\" : \"manufacturer\"  }"
+
+### result of the request
+
+{"status":"success","message":"Added medicine successfully"}
+
+
+### Distributor raising purchase order/ product order for medicine1 with manufacturer
+
+curl -s -X POST http://localhost:5000/createPurchaseOrder -H "content-type: application/json" -d "{\"buyerId\" : \"4\", \"sellerId\" : \"1\", \"drugName\" : \"medicine1\", \"quantity\":\"2\", \"companyRole\": \"distributor\" }"
+
+### result of the request
+
+{"status":"success","message":"Created Purchase order successfully","data":"{\"productorderid\":\"\\u0000buyerkey~medicinename\\u00004\\u0000medicine1\\u0000\",\"doctype\":\"productorder\",\"medicinename\":\"medicine1\",\"quantity\":\"2\",\"buyerkey\":\"4\",\"sellerkey\":\"1\",\"createdat\":\"\"}"}
+
+### Manufacturer creating shipment with transporter details
+
+curl -s -X POST http://localhost:5000/createShipment -H "content-type: application/json" -d "{\"buyerId\" : \"4\",  \"drugName\" : \"medicine1\", \"listOfAssets\":\"serial1,serial2\", \"transporterId\":\"5\",\"companyRole\": \"manufacturer\" }"
+
+### result of the request
+
+{"status":"success","message":"Created shipment successfully","data":"{\"buyerid\":\"4\",\"doctype\":\"shipment\",\"medicinename\":\"medicine1\",\"TransporterId\":\"5\",\"creator\":\"\",\"assetlist\":[\"serial1\",\"serial2\"],\"createdat\":\"2020-05-15 07:20:15.744 +0000 UTC\",\"updatedat\":\"2020-05-15 07:20:15.744 +0000 UTC\",\"status\":\"intransit\"}"}
+
+### Transporter updating shipment details after delivery
+ 
+curl -s -X POST http://localhost:5000/updateShipment -H "content-type: application/json" -d "{\"buyerId\" : \"4\",  \"drugName\" : \"medicine1\",  \"transporterId\":\"5\",\"companyRole\": \"transporter\" }"
+
+
+### result of the request
+
+{"status":"success","message":"Updated shipment successfully","data":"{\"buyerid\":\"4\",\"doctype\":\"shipment\",\"medicinename\":\"medicine1\",\"TransporterId\":\"5\",\"creator\":\"\",\"assetlist\":[\"serial1\",\"serial2\"],\"createdat\":\"2020-05-15 07:20:15.744 +0000 UTC\",\"updatedat\":\"2020-05-15 07:23:04.358 +0000 UTC\",\"status\":\"delivered\"}"}
+
+### Retailer raising purchase order for medicine1 with distributor
+
+curl -s -X POST http://localhost:5000/createPurchaseOrder -H "content-type: application/json" -d "{\"buyerId\" : \"6\", \"sellerId\" : \"4\", \"drugName\" : \"medicine1\", \"quantity\":\"2\", \"companyRole\": \"retailer\" }"
+
+### result of the request
+
+{"status":"success","message":"Created Purchase order successfully","data":"{\"productorderid\":\"\\u0000buyerkey~medicinename\\u00006\\u0000medicine1\\u0000\",\"doctype\":\"productorder\",\"medicinename\":\"medicine1\",\"quantity\":\"2\",\"buyerkey\":\"6\",\"sellerkey\":\"4\",\"createdat\":\"\"}"}
+
+### Distributor creating shipment for medicine1
+
+curl -s -X POST http://localhost:5000/createShipment -H "content-type: application/json" -d "{\"buyerId\" : \"6\",  \"drugName\" : \"medicine1\", \"listOfAssets\":\"serial1,serial2\", \"transporterId\":\"5\",\"companyRole\": \"distributor\" }"
+
+### result of the request
+
+{"status":"success","message":"Created shipment successfully","data":"{\"buyerid\":\"6\",\"doctype\":\"shipment\",\"medicinename\":\"medicine1\",\"TransporterId\":\"5\",\"creator\":\"\",\"assetlist\":[\"serial1\",\"serial2\"],\"createdat\":\"2020-05-15 07:32:09.366 +0000 UTC\",\"updatedat\":\"2020-05-15 07:32:09.366 +0000 UTC\",\"status\":\"intransit\"}"}
+
+### Transporter updating shipment details after delivery
+
+curl -s -X POST http://localhost:5000/updateShipment -H "content-type: application/json" -d "{\"buyerId\" : \"6\",  \"drugName\" : \"medicine1\",  \"transporterId\":\"5\",\"companyRole\": \"transporter\" }"
+
+### result of the request
+
+{"status":"success","message":"Updated shipment successfully","data":"{\"buyerid\":\"6\",\"doctype\":\"shipment\",\"medicinename\":\"medicine1\",\"TransporterId\":\"5\",\"creator\":\"\",\"assetlist\":[\"serial1\",\"serial2\"],\"createdat\":\"2020-05-15 07:32:09.366 +0000 UTC\",\"updatedat\":\"2020-05-15 07:32:55.367 +0000 UTC\",\"status\":\"delivered\"}"}
+
+### retailer selling medicine to customer with aadhar details
+
+curl -s -X POST http://localhost:5000/retailMedicine -H "content-type: application/json" -d "{ \"drugName\" : \"medicine1\", \"serialNo\" :\"serial1\", \"retailerId\":\"6\",\"customerAadhar\":\"1234\", \"companyRole\": \"retailer\" }"
+
+### result of the request
+
+{"status":"success","message":"Medicine sold entry by retailer created successfully","data":"{\"productid\":\"\\u0000serialno~name\\u0000serial1\\u0000medicine1\\u0000\",\"doctype\":\"medicine\",\"name\":\"medicine1\",\"serialno\":\"serial1\",\"manufacturingdate\":\"01-01-2020\",\"expirydate\":\"01-01-2030\",\"owner\":\"1234\",\"manufacturerid\":\"1\",\"manufacturername\":\"company1\",\"shipmentlist\":[\"\\u0000buyerkey~medicinename~doctype\\u00004\\u0000medicine1\\u0000shipment\\u0000\",\"\\u0000buyerkey~medicinename~doctype\\u00006\\u0000medicine1\\u0000shipment\\u0000\"],\"createdat\":\"2020-05-15 04:26:34.435 +0000 UTC\"}"}
+
+### Any org viewing the history of the medicine. Tracing the medicine
+
+curl -s -X GET http://localhost:5000/viewHistory/serial1/medicine1/retailer -H "content-type: application/json"
+
+### result of the request
+
+{"status":"success","data":"[{\"txn\":\"b2570b0ed8a496eda5c7d65ee1c2cfe56c7ce88d7ccfc9f67f160fe8a13e8a6c\", \"Value\":{\"productid\":\"\\u0000serialno~name\\u0000serial1\\u0000medicine1\\u0000\",\"doctype\":\"medicine\",\"name\":\"medicine1\",\"serialno\":\"serial1\",\"manufacturingdate\":\"01-01-2020\",\"expirydate\":\"01-01-2030\",\"owner\":\"1\",\"manufacturerid\":\"1\",\"manufacturername\":\"company1\",\"shipmentlist\":[],\"createdat\":\"2020-05-15 04:26:34.435 +0000 UTC\"}, \"Timestamp\":\"2020-05-15 04:26:34.435 +0000 UTC\",\"IsDelete\":\"false\"},{\"txn\":\"54a96ec2a4b77250f59df11afe348f1aacecba99c898315026ffc90a8636ff0c\", \"Value\":{\"productid\":\"\\u0000serialno~name\\u0000serial1\\u0000medicine1\\u0000\",\"doctype\":\"medicine\",\"name\":\"medicine1\",\"serialno\":\"serial1\",\"manufacturingdate\":\"01-01-2020\",\"expirydate\":\"01-01-2030\",\"owner\":\"4\",\"manufacturerid\":\"1\",\"manufacturername\":\"company1\",\"shipmentlist\":[\"\\u0000buyerkey~medicinename~doctype\\u00004\\u0000medicine1\\u0000shipment\\u0000\"],\"createdat\":\"2020-05-15 04:26:34.435 +0000 UTC\"}, \"Timestamp\":\"2020-05-15 07:23:04.358 +0000 UTC\",\"IsDelete\":\"false\"},{\"txn\":\"8bdca14f9151a672f29221699d5fda30c71c125ec745d9e0723b3236faee86cf\", \"Value\":{\"productid\":\"\\u0000serialno~name\\u0000serial1\\u0000medicine1\\u0000\",\"doctype\":\"medicine\",\"name\":\"medicine1\",\"serialno\":\"serial1\",\"manufacturingdate\":\"01-01-2020\",\"expirydate\":\"01-01-2030\",\"owner\":\"6\",\"manufacturerid\":\"1\",\"manufacturername\":\"company1\",\"shipmentlist\":[\"\\u0000buyerkey~medicinename~doctype\\u00004\\u0000medicine1\\u0000shipment\\u0000\",\"\\u0000buyerkey~medicinename~doctype\\u00006\\u0000medicine1\\u0000shipment\\u0000\"],\"createdat\":\"2020-05-15 04:26:34.435 +0000 UTC\"}, \"Timestamp\":\"2020-05-15 07:32:55.367 +0000 UTC\",\"IsDelete\":\"false\"},{\"txn\":\"2c63d8473e6734c032aa06ba9227b25b6b8fc38f938b23516f91314e7481c7d3\", \"Value\":{\"productid\":\"\\u0000serialno~name\\u0000serial1\\u0000medicine1\\u0000\",\"doctype\":\"medicine\",\"name\":\"medicine1\",\"serialno\":\"serial1\",\"manufacturingdate\":\"01-01-2020\",\"expirydate\":\"01-01-2030\",\"owner\":\"1234\",\"manufacturerid\":\"1\",\"manufacturername\":\"company1\",\"shipmentlist\":[\"\\u0000buyerkey~medicinename~doctype\\u00004\\u0000medicine1\\u0000shipment\\u0000\",\"\\u0000buyerkey~medicinename~doctype\\u00006\\u0000medicine1\\u0000shipment\\u0000\"],\"createdat\":\"2020-05-15 04:26:34.435 +0000 UTC\"}, \"Timestamp\":\"2020-05-15 07:59:02.555 +0000 UTC\",\"IsDelete\":\"false\"}]"}
+
+### Any org viewing the current status of medicine
+
+curl -s -X GET http://localhost:5000/viewMedicineCurrentState/serial1/medicine1/retailer -H "content-type: application/json"
+
+### result of the request
+
+{"status":"success","data":"{\"productid\":\"\\u0000serialno~name\\u0000serial1\\u0000medicine1\\u0000\",\"doctype\":\"medicine\",\"name\":\"medicine1\",\"serialno\":\"serial1\",\"manufacturingdate\":\"01-01-2020\",\"expirydate\":\"01-01-2030\",\"owner\":\"1234\",\"manufacturerid\":\"1\",\"manufacturername\":\"company1\",\"shipmentlist\":[\"\\u0000buyerkey~medicinename~doctype\\u00004\\u0000medicine1\\u0000shipment\\u0000\",\"\\u0000buyerkey~medicinename~doctype\\u00006\\u0000medicine1\\u0000shipment\\u0000\"],\"createdat\":\"2020-05-15 04:26:34.435 +0000 UTC\"}"}

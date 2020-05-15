@@ -1,0 +1,60 @@
+{
+    "name": "pharma-network-manufacturer",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Manufacturer",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Manufacturer": {
+            "mspid": "ManufacturerMSP",
+            "peers": [
+                "peer0.manufacturer.pharma-network.com",
+                "peer1.manufacturer.pharma-network.com"
+            ],
+            "certificateAuthorities": [
+                "ca.manufacturer.pharma-network.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.manufacturer.pharma-network.com": {
+            "url": "grpcs://localhost:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIIClTCCAjygAwIBAgIRAKFoUyLDVXsHwWw5+J+r4WgwCgYIKoZIzj0EAwIwgZQx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSgwJgYDVQQKEx9tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsu\nY29tMS4wLAYDVQQDEyV0bHNjYS5tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsu\nY29tMB4XDTIwMDUxNDEzMDMwMFoXDTMwMDUxMjEzMDMwMFowgZQxCzAJBgNVBAYT\nAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMSgwJgYDVQQKEx9tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29tMS4wLAYD\nVQQDEyV0bHNjYS5tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29tMFkwEwYH\nKoZIzj0CAQYIKoZIzj0DAQcDQgAE3s6whneuw2Djq9Tqxwb0KcvF6yr9Fl15nmRJ\nbVywJITQJo+wyTBtZkgwbHmU5Oe3qBakDufXO9jFSLXoSYj+mqNtMGswDgYDVR0P\nAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMB\nAf8EBTADAQH/MCkGA1UdDgQiBCA6qOh5j3C+tVjA64TcBy+TTAL8YafKRyvCIbzO\naDiVIjAKBggqhkjOPQQDAgNHADBEAiBxXU1fVj/MntA7nbOV46SU1ap11zgDg81a\n62FWarYd8gIgMj0Rvh+5ngBVag905eJTjr5I1owvILhjLBZ/nyFAq6Y=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.manufacturer.pharma-network.com",
+                "hostnameOverride": "peer0.manufacturer.pharma-network.com"
+            }
+        },
+        "peer1.manufacturer.pharma-network.com": {
+            "url": "grpcs://localhost:8051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIIClTCCAjygAwIBAgIRAKFoUyLDVXsHwWw5+J+r4WgwCgYIKoZIzj0EAwIwgZQx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSgwJgYDVQQKEx9tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsu\nY29tMS4wLAYDVQQDEyV0bHNjYS5tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsu\nY29tMB4XDTIwMDUxNDEzMDMwMFoXDTMwMDUxMjEzMDMwMFowgZQxCzAJBgNVBAYT\nAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2Nv\nMSgwJgYDVQQKEx9tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29tMS4wLAYD\nVQQDEyV0bHNjYS5tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29tMFkwEwYH\nKoZIzj0CAQYIKoZIzj0DAQcDQgAE3s6whneuw2Djq9Tqxwb0KcvF6yr9Fl15nmRJ\nbVywJITQJo+wyTBtZkgwbHmU5Oe3qBakDufXO9jFSLXoSYj+mqNtMGswDgYDVR0P\nAQH/BAQDAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMB\nAf8EBTADAQH/MCkGA1UdDgQiBCA6qOh5j3C+tVjA64TcBy+TTAL8YafKRyvCIbzO\naDiVIjAKBggqhkjOPQQDAgNHADBEAiBxXU1fVj/MntA7nbOV46SU1ap11zgDg81a\n62FWarYd8gIgMj0Rvh+5ngBVag905eJTjr5I1owvILhjLBZ/nyFAq6Y=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer1.manufacturer.pharma-network.com",
+                "hostnameOverride": "peer1.manufacturer.pharma-network.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.manufacturer.pharma-network.com": {
+            "url": "https://localhost:7054",
+            "caName": "ca-manufacturer",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICjzCCAjagAwIBAgIRAPtmiV2sEvlmu+0q+ScJRswwCgYIKoZIzj0EAwIwgZEx\nCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g\nRnJhbmNpc2NvMSgwJgYDVQQKEx9tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsu\nY29tMSswKQYDVQQDEyJjYS5tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29t\nMB4XDTIwMDUxNDEzMDMwMFoXDTMwMDUxMjEzMDMwMFowgZExCzAJBgNVBAYTAlVT\nMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMSgw\nJgYDVQQKEx9tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29tMSswKQYDVQQD\nEyJjYS5tYW51ZmFjdHVyZXIucGhhcm1hLW5ldHdvcmsuY29tMFkwEwYHKoZIzj0C\nAQYIKoZIzj0DAQcDQgAExe+csM6IUqPv22xESkg8MmdJzeHoaLwHK8F2nA99CELt\n5N/ZrYTxogDqPdHrR356t4wVm4+/sh+TkvxGU3kgz6NtMGswDgYDVR0PAQH/BAQD\nAgGmMB0GA1UdJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD\nAQH/MCkGA1UdDgQiBCDSw8npzizcoeQyneOrHjMJLCSZItUN0T4pELDDNk3j1DAK\nBggqhkjOPQQDAgNHADBEAiBce3q7h7C04fFM6imGmSwB8UaxO9E44TabshWt9vks\nDwIgfWqHnXEM6QnCkwrTgSNoo+c+Bw3PTzyseoZTSi7bFfk=\n-----END CERTIFICATE-----\n"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

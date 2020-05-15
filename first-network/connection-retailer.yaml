@@ -1,0 +1,75 @@
+---
+name: first-network-retailer
+version: 1.0.0
+client:
+  organization: Retailer
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Retailer:
+    mspid: RetailerMSP
+    peers:
+    - peer0.retailer.pharma-network.com
+    - peer1.retailer.pharma-network.com
+    certificateAuthorities:
+    - ca.retailer.pharma-network.com
+peers:
+  peer0.retailer.pharma-network.com:
+    url: grpcs://localhost:13051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIIChjCCAiygAwIBAgIRAMY8C9UlmvU49L+IkZvn/QYwCgYIKoZIzj0EAwIwgYwx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMSQwIgYDVQQKExtyZXRhaWxlci5waGFybWEtbmV0d29yay5jb20x
+        KjAoBgNVBAMTIXRsc2NhLnJldGFpbGVyLnBoYXJtYS1uZXR3b3JrLmNvbTAeFw0y
+        MDA1MTQxMzAzMDBaFw0zMDA1MTIxMzAzMDBaMIGMMQswCQYDVQQGEwJVUzETMBEG
+        A1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEkMCIGA1UE
+        ChMbcmV0YWlsZXIucGhhcm1hLW5ldHdvcmsuY29tMSowKAYDVQQDEyF0bHNjYS5y
+        ZXRhaWxlci5waGFybWEtbmV0d29yay5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMB
+        BwNCAASB2+21KOaku4ACNwkDHT7MP0gFqGKZKNnHlU/g5mhJ/RWaEeGnw1q6QIyE
+        1Hz6Nyq2KNa15boMG76zDUQGaTvlo20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0l
+        BBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0O
+        BCIEIH3v03HuXDkIs+Dh5xp152Q44EM4mZE+1bSzsZw7XgGCMAoGCCqGSM49BAMC
+        A0gAMEUCIQDPeAoVoMj8aBWOgdgbHwl5IKYI0MtFd7klnnzxYfA7WQIgF7zcFxsc
+        2nBrT8mwSVwYkaJxqDggoMTqmlt74MndV/U=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer0.retailer.pharma-network.com
+      hostnameOverride: peer0.retailer.pharma-network.com
+  peer1.orgretailer.pharma-network.com:
+    url: grpcs://localhost:14051
+    tlsCACerts:
+      pem: |
+        -----BEGIN CERTIFICATE-----
+        MIIChjCCAiygAwIBAgIRAMY8C9UlmvU49L+IkZvn/QYwCgYIKoZIzj0EAwIwgYwx
+        CzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQHEw1TYW4g
+        RnJhbmNpc2NvMSQwIgYDVQQKExtyZXRhaWxlci5waGFybWEtbmV0d29yay5jb20x
+        KjAoBgNVBAMTIXRsc2NhLnJldGFpbGVyLnBoYXJtYS1uZXR3b3JrLmNvbTAeFw0y
+        MDA1MTQxMzAzMDBaFw0zMDA1MTIxMzAzMDBaMIGMMQswCQYDVQQGEwJVUzETMBEG
+        A1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEkMCIGA1UE
+        ChMbcmV0YWlsZXIucGhhcm1hLW5ldHdvcmsuY29tMSowKAYDVQQDEyF0bHNjYS5y
+        ZXRhaWxlci5waGFybWEtbmV0d29yay5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMB
+        BwNCAASB2+21KOaku4ACNwkDHT7MP0gFqGKZKNnHlU/g5mhJ/RWaEeGnw1q6QIyE
+        1Hz6Nyq2KNa15boMG76zDUQGaTvlo20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0l
+        BBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0O
+        BCIEIH3v03HuXDkIs+Dh5xp152Q44EM4mZE+1bSzsZw7XgGCMAoGCCqGSM49BAMC
+        A0gAMEUCIQDPeAoVoMj8aBWOgdgbHwl5IKYI0MtFd7klnnzxYfA7WQIgF7zcFxsc
+        2nBrT8mwSVwYkaJxqDggoMTqmlt74MndV/U=
+        -----END CERTIFICATE-----
+        
+    grpcOptions:
+      ssl-target-name-override: peer1.retailer.pharma-network.com
+      hostnameOverride: peer1.retailer.pharma-network.com
+certificateAuthorities:
+  ca.orgretailer.pharma-network.com:
+    url: https://localhost:10054
+    caName: ca-retailer
+    tlsCACerts:
+      pem: |
+        ${CAPEM}
+    httpOptions:
+      verify: false
